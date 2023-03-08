@@ -42,7 +42,7 @@ set_target_properties(
 #]]
 
 add_compile_definitions(PLUGIN_NAME="${CMAKE_PROJECT_NAME}"
-	PLUGIN_VERSION="${CMAKE_PROJECT_VERSION}")
+                        PLUGIN_VERSION="${CMAKE_PROJECT_VERSION}")
 
 # /!\ TAKE NOTE: No need to edit things past this point /!\
 
