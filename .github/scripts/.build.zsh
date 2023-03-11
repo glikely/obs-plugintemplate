@@ -172,36 +172,8 @@ Usage: %B${functrace[1]%:*}%b <option> [<options>]
   local product_author
   local product_email
 
-  IFS=/ read -r product_name product_version product_author product_email <<< \
-    "$(jq -r '. | {name, version, author, email} | join("/")' ${buildspec_file})"
-
-  product_author=\"${product_author}\"
-  product_email=\"${product_email}\"
-
-  case ${host_os} {
-    macos)
-      sed -i '' \
-        "s/project(\(.*\) VERSION \(.*\))/project(${product_name} VERSION ${product_version})/" \
-        "${project_root}/CMakeLists.txt"
-      sed -i '' \
-        "s/set(PLUGIN_AUTHOR \(.*\))/set(PLUGIN_AUTHOR ${product_author})/"\
-        "${project_root}/CMakeLists.txt"
-      sed -i '' \
-        "s/set(LINUX_MAINTAINER_EMAIL \(.*\))/set(LINUX_MAINTAINER_EMAIL ${product_email})/"\
-        "${project_root}/CMakeLists.txt"
-      ;;
-    linux)
-      sed -i'' \
-        "s/project(\(.*\) VERSION \(.*\))/project(${product_name} VERSION ${product_version})/"\
-        "${project_root}/CMakeLists.txt"
-      sed -i'' \
-        "s/set(PLUGIN_AUTHOR \(.*\))/set(PLUGIN_AUTHOR ${product_author})/"\
-        "${project_root}/CMakeLists.txt"
-      sed -i'' \
-        "s/set(LINUX_MAINTAINER_EMAIL \(.*\))/set(LINUX_MAINTAINER_EMAIL ${product_email})/"\
-        "${project_root}/CMakeLists.txt"
-      ;;
-  }
+  IFS=/ read -r product_name product_version <<< \
+    "$(jq -r '. | {name, version} | join("/")' ${buildspec_file})"
 
   setup_obs
 
