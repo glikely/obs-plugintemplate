@@ -6,7 +6,6 @@ string(JSON BUILDSPEC_NAME GET ${BUILDSPEC_JSON} name)
 string(JSON BUILDSPEC_VERSION GET ${BUILDSPEC_JSON} version)
 string(JSON PLUGIN_AUTHOR GET ${BUILDSPEC_JSON} author)
 string(JSON LINUX_MAINTAINER_EMAIL GET ${BUILDSPEC_JSON} email)
-message("building ${BUILDSPEC_NAME}, ${BUILDSPEC_VERSION}, ${PLUGIN_AUTHOR} <${LINUX_MAINTAINER_EMAIL}>")
 
 # Change obs-plugintemplate to your plugin's name in a machine-readable format (e.g.:
 # obs-myawesomeplugin) and set
