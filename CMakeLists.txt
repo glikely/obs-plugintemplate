@@ -1,20 +1,20 @@
-cmake_minimum_required(VERSION 3.16...3.21)
+cmake_minimum_required(VERSION 3.19...3.21)
+
+# read details from the buildspec json file
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/buildspec.json BUILDSPEC_JSON)
+string(JSON BUILDSPEC_NAME GET ${BUILDSPEC_JSON} name)
+string(JSON BUILDSPEC_VERSION GET ${BUILDSPEC_JSON} version)
+string(JSON PLUGIN_AUTHOR GET ${BUILDSPEC_JSON} author)
+string(JSON LINUX_MAINTAINER_EMAIL GET ${BUILDSPEC_JSON} email)
 
 # Change obs-plugintemplate to your plugin's name in a machine-readable format (e.g.:
 # obs-myawesomeplugin) and set
-project(obs-plugintemplate VERSION 1.0.0)
+project(${BUILDSPEC_NAME} VERSION ${BUILDSPEC_VERSION})
 add_library(${CMAKE_PROJECT_NAME} MODULE)
-
-# Replace `Your Name Here` with the name (yours or your organization's) you want to see as the
-# author of the plugin (in the plugin's metadata itself and in the installers)
-set(PLUGIN_AUTHOR "Your Name Here")
 
 # Replace `com.example.obs-plugin-template` with a unique Bundle ID for macOS releases (used both in
 # the installer and when submitting the installer for notarization)
 set(MACOS_BUNDLEID "com.example.${CMAKE_PROJECT_NAME}")
-
-# Replace `me@contoso.com` with the maintainer email address you want to put in Linux packages
-set(LINUX_MAINTAINER_EMAIL "me@mymailhost.com")
 
 # Add your custom source files here - header files are optional and only required for visibility
 # e.g. in Xcode or Visual Studio

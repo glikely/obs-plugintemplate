@@ -57,10 +57,6 @@ function Build {
         $CmakeGenerator = $script:VisualStudioVersion
     }
 
-    (Get-Content -Path ${ProjectRoot}/CMakeLists.txt -Raw) `
-        -replace "project\((.*) VERSION (.*)\)", "project(${ProductName} VERSION ${ProductVersion})" `
-        | Out-File -Path ${ProjectRoot}/CMakeLists.txt -NoNewline
-
     Setup-Obs
 
     Push-Location -Stack BuildTemp
