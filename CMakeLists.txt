@@ -1,8 +1,13 @@
-cmake_minimum_required(VERSION 3.16...3.21)
+cmake_minimum_required(VERSION 3.19...3.21)
+
+# read details from the buildspec json file
+file(READ ${CMAKE_CURRENT_SOURCE_DIR}/buildspec.json BUILDSPEC_JSON)
+string(JSON BUILDSPEC_VERSION GET ${BUILDSPEC_JSON} version)
+message("building version ${BUILDSPEC_VERSION}")
 
 # Change obs-plugintemplate to your plugin's name in a machine-readable format (e.g.:
 # obs-myawesomeplugin) and set
-project(obs-plugintemplate VERSION 1.0.0)
+project(obs-plugintemplate VERSION ${BUILDSPEC_VERSION})
 add_library(${CMAKE_PROJECT_NAME} MODULE)
 
 # Replace `Your Name Here` with the name (yours or your organization's) you want to see as the
